@@ -52,6 +52,5 @@ public class CustomerServicesTest {
             createCustomerSaveAccount.setPassword("12345Paul!");
             CreateCustomerPocketSaveAccountResponse createCustomerPocketSaveAccountResponse = customerService.createAccount(createCustomerSaveAccount);
             assertThat(createCustomerPocketSaveAccountResponse).isNotNull();
-
     }
 }

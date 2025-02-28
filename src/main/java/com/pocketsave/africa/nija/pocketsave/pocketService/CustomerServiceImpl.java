@@ -32,6 +32,7 @@ public class CustomerServiceImpl implements CustomerService{
         Customers customers = customersRepository.findById(depositRequest.getCustomerId())
                 .orElseThrow(()-> new CustomerNotFoundException("Customer Not Found "+ depositRequest.getCustomerId()));
         PocketWallet pocketWallet = customers.getPocketWallet();
+        pocketWallet.setBalance(pocketWallet.getBalance().add(depositRequest.getAmount()));
         PocketWalletDepositRequest pocketWalletDepositRequest = new PocketWalletDepositRequest();
         pocketWalletDepositRequest.setAmount(depositRequest.getAmount());
         pocketWalletDepositRequest.setWalletId(pocketWallet.getId());
