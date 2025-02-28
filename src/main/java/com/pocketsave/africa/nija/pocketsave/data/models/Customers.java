@@ -1,22 +1,20 @@
 package com.pocketsave.africa.nija.pocketsave.data.models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import static jakarta.persistence.CascadeType.PERSIST;
 
 @Entity
 public class Customers {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String phoneNumber;
-    @OneToOne(mappedBy = "customers", cascade = PERSIST)
+    @OneToOne(mappedBy = "customer", cascade = PERSIST)
     private PocketWallet pocketWallet;
 
     public PocketWallet getPocketWallet() {
