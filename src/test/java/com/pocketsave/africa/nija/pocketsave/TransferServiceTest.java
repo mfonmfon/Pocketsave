@@ -27,9 +27,9 @@ public class TransferServiceTest {
 
     @Test
     public void testThatCanDoWalletToWalletTransfer_() throws InsufficientFundsException, InvalidAmountException, SenderWalletNotFoundException, PocketWalletNotFoundException {
-        Long senderWallet = 3L;
+        Long senderWallet = 1L;
         Long receiverWallet = 2L;
-        BigDecimal transferAmount = new BigDecimal(4000);
+        BigDecimal transferAmount = new BigDecimal(1000);
         WalletToWalletTransferRequest walletToWalletTransferRequest = new WalletToWalletTransferRequest();
         walletToWalletTransferRequest.setSenderWallet(senderWallet);
         walletToWalletTransferRequest.setReceiverWallet(receiverWallet);

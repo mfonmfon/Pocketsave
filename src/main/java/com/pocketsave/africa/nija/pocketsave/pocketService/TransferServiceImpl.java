@@ -45,10 +45,11 @@ public class TransferServiceImpl implements TransferService{
            if(senderWallet.getBalance().compareTo(walletToWalletTransferRequest.getAmount()) < 0){
                throw new InsufficientFundsException(INSUFFICIENT_FUNDS.getMessage());
            }
+
            senderWallet.setBalance(senderWallet.getBalance().subtract(walletToWalletTransferRequest.getAmount()));
+           // Update the receiver's wallet balance and save the transfer details to the database.'
            receiverWallet.setBalance(receiverWallet.getBalance().add(walletToWalletTransferRequest.getAmount()));
-//           log.info("Sender wallet transfer id{}", senderWallet.getId());
-//           log.info("Receiver wallet id{}", receiverWallet.getId());
+           // Save the updated wallet balances and transfer details to the database.
            pocketWalletRepository.save(senderWallet);
            pocketWalletRepository.save(receiverWallet);
            Transfer transfer = new Transfer();
@@ -56,11 +57,11 @@ public class TransferServiceImpl implements TransferService{
            transfer.setSenderWallet(senderWallet);
            transfer.setReceiverWallet(receiverWallet);
            transfer.setTransferStatus(walletToWalletTransferRequest.getTransferStatus());
+           transfer.setTransferDate(walletToWalletTransferRequest.getTransferDate());
 //           log.info("Sender wallet transfer id{}", senderWallet.getId());
            transferRepository.save(transfer);
            WalletToWalletTransferResponse walletToWalletTransferResponse = new WalletToWalletTransferResponse();
            walletToWalletTransferResponse.setTransferResponse(TRANSFER_SUCCESS_MESSAGE.getMessage());
-//        walletToWalletTransferResponse.setTransferResponse(transfer.getTransferStatus());
            return walletToWalletTransferResponse;
        }catch(Exception exception){
            throw new RuntimeException("Transaction failed ");
