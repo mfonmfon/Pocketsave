@@ -21,6 +21,17 @@ public class PocketWallet {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customers customer;
 
+    @Version
+    private Long version = 0L;
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = 0L;
+    }
+
     public Customers getCustomer() {
         return customer;
     }
